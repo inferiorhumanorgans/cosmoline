@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css"> 
+        <style type="text/css">
+            .results tbody td:first-child {
+                word-wrap: break-word;
+            }
+        </style>
+        <title>Function Coverage</title>
+    </head>
+    <body>
+        <table class="results" style="table-layout: fixed;">
+            <colgroup>
+                <col style="width: 75%;">
+                <col style="width: 25%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th colspan=2><a href="./index.html">Code Coverage Report</a> &#x00BB; Function Coverage</th>
+                </tr>
+                <tr>
+                    <th>Function</th>
+                    <th>Hits</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each functions}}
+                <tr>
+                    <td>{{ name }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </body>
+</html>

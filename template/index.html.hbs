@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css"> 
+        <style type="text/css">
+            .lines_width { width: 3ch; display: inline-block; }
+            .functions_width { width: 2ch; display: inline-block; }
+            .lines_width:nth-child(0n+2) { text-align: left; }
+            .functions_width:nth-child(0n+2) { text-align: left; }
+        </style>
+        <title>Code Coverage Report</title>
+    </head>
+    <body>
+        <table class="results">
+            <thead>
+                <tr>
+                    <th colspan=5>Code Coverage Report</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th colspan=5>Function Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan=5><a href="functions.html">details</a></td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                    <th colspan=5>File Summary</th>
+                </tr>
+                <tr>
+                    <th>Filename</th>
+                    <th colspan=2>Line Coverage</th>
+                    <th colspan=2>Function Coverage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each files}}
+                <tr>
+                    <td><a href="{{ link }}">{{ name }}</a></td>
+                    <td class="{{ line_hit_class }}">{{ lines_percent }}%</td>
+                    <td class="blue"><span class="lines_width">{{ lines_covered }}</span> / <span class="lines_width">{{ lines_count }}</span></td>
+                    <td class="{{ function_hit_class }}">{{ functions_percent }}%</td>
+                    <td class="blue"><span class="functions_width">{{ functions_covered }}</span> / <span class="functions_width">{{ functions_count }}</span></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </body>
+</html>

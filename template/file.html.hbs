@@ -1,0 +1,23 @@
+<html>
+    <head>
+         <link rel="stylesheet" href="style.css">
+         <meta charset="utf-8">
+         <style type="text/css">
+             .line {
+                width: {{ max_line_len }}em;
+             }
+             .line:before {
+                 width: {{ line_count_width }}em;
+             }
+         </style>
+         <title>File Detail: {{ filename }}</title>
+    </head>
+    <body>
+        <div class="file-header"><a href="./index.html">Code Coverage Report</a> &#x00BB; {{ filename }}</div>
+        <div class="container">
+            {{ #each contents }}
+                <div class="line">{{ this }}</div>
+            {{ /each }}
+        </div>
+    </body>
+</html>

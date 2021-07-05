@@ -1,0 +1,126 @@
+html, body, * {
+    font-family: 'Menlo', Helvetica;
+    font-weight:  300;
+}
+
+html, body {
+    background-color: hsl(210, 15%, 24%);
+    color: #ffffffdd;
+}
+
+a, a:active, a:visited {
+    color: inherit;
+}
+
+.results, .results td, .results th {
+    border: 0px solid hsl(221, 12%, 69%);
+    border-collapse: collapse;
+}
+
+.results {
+    width: 75vw;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 10pt;
+}
+
+.results td, .results th {
+    padding: 0.25em;
+}
+
+.results th {
+    color: #c594c5;
+    font-weight: normal;
+}
+
+.results thead:nth-of-type(1) tr:nth-of-type(1) th {
+    font-size: 12pt;
+}
+
+.results td:nth-child(2),
+.results td:nth-child(3),
+.results td:nth-child(4),
+.results td:nth-child(5) {
+    text-align: right;
+}
+
+.results thead tr th {
+    background-color: #1d1e22;
+}
+
+.results tbody tr:nth-child(odd) td {
+    background-color: #d0f4ff14;
+}
+
+.red {
+    color: #ee6a6f !important;
+}
+
+.yellow {
+    color: #fab763 !important;
+}
+
+.green {
+    color: #a3ce9e !important;
+}
+
+.blue {
+    color: #6699cc !important;
+}
+
+.line {
+    white-space: pre;
+    counter-increment: line;
+    font-size: 10pt;
+    padding: 0.25em 0.5em;
+    min-width: calc(75vw - 1em);
+}
+
+.line:hover {
+    background-color: #a3ce9e40 !important;
+}
+
+.line:before {
+    content: counter(line);
+    font-size: 10pt;
+    width: 2.5em;
+    display: inline-block;
+    -webkit-user-select: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #6699cc;
+    vertical-align: bottom;
+}
+
+.line:nth-child(odd) {
+    background-color: #d0f4ff30;
+}
+
+.line:nth-child(even) {
+    background-color: #d0f4ff14;
+}
+
+.file-header, .file-header > * {
+    min-width: 75vw;
+    width: 75vw;
+    margin: 0 auto;
+    background-color: #1d1e22;
+    color: #c594c5;
+    text-align: center;
+}
+
+.container {
+    width: 75vw;
+    margin-left: auto;
+    margin-right: auto;
+    counter-reset: line;
+    overflow-x: auto;
+}
+
+.hit {
+    color: #a3ce9e !important;
+}
+
+.hit[data-count='0'] {
+    color: #ee6a6f !important;
+}
