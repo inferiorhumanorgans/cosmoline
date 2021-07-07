@@ -5,9 +5,9 @@ Cosmoline is a quick and dirty code coverage report generator for rust.  It take
 
 ## How does it work?
 
-Input: JSON from `llvm-cov export` (or its convenient wrapper `cargo cov`)
+Input: JSON from `llvm-cov export` (or its convenient wrapper [`cargo cov`](https://github.com/kennytm/cov))
 
-Output: Pretty HTML reports are rendered with handlebars-rs.  The templates are located in the [template](./template) directory and compiled into the `cosmoline` binary.
+Output: Pretty HTML reports are rendered with [`handlebars-rs`](https://docs.rs/handlebars/4.1.0/handlebars).  The templates are located in the [template](./template) directory and compiled into the `cosmoline` binary.
 
 ## How do I use it?
 
@@ -15,7 +15,7 @@ Output: Pretty HTML reports are rendered with handlebars-rs.  The templates are 
 
 Instructions on [how to configure nightly](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/instrument-coverage.html) to build profiling data in the [Rust Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/the-unstable-book.html).
 
-Install `jq` (useful, but not strictly necessary):
+Install [`jq`](https://stedolan.github.io/jq/) (useful, but not strictly necessary):
 
 On e.g. macOS:
 ```bash
