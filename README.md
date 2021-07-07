@@ -85,3 +85,10 @@ Clicking on a filename will take you to an annotated rendering of that file's co
 ![File Detail](../screenshots/file-detail.png?raw=true)
 
 Code that's been instrumented is highlighted in red if it was not executed and green if the code's been executed.  Code that has not been instrumented remains white.
+
+## TODO
+
+* render clippy warnings?
+* refactor CSS
+* table sorting (JS)
+* include cargo and git metadata
