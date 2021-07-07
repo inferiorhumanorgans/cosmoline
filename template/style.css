@@ -37,19 +37,16 @@ a, a:active, a:visited {
     font-size: 12pt;
 }
 
-.results td:nth-child(2),
-.results td:nth-child(3),
-.results td:nth-child(4),
-.results td:nth-child(5) {
-    text-align: right;
-}
-
 .results thead tr th {
     background-color: #1d1e22;
 }
 
 .results tbody tr:nth-child(odd) td {
     background-color: #d0f4ff14;
+}
+
+.results tbody tr:nth-child(even) td {
+    background-color: #d0f4ff30;
 }
 
 .red {
@@ -123,4 +120,53 @@ a, a:active, a:visited {
 
 .hit[data-count='0'] {
     color: #ee6a6f !important;
+}
+
+.info {
+    font-size: 10pt;
+    background-color: #d0f4ff14;
+    padding: 1em;
+}
+
+// NEW
+
+.lines_width:first-child:after,
+.functions_width:first-child:after {
+    content: '/';
+    padding-left: 0.75ch;
+}
+
+.lines_width:nth-child(0n+2):before,
+.functions_width:nth-child(0n+2):before {
+    content: '';
+    padding-left: 0.575ch;
+}
+
+.percent_n:after {
+    content: '.';
+    padding-left: 0.0625ch;
+}
+.percent_d:after {
+    content: '%';
+    padding-left: 0.1875ch;
+}
+
+.lines_width,
+.functions_width {
+    display: inline-block;
+    text-align: left;
+}
+
+.lines_width:first-child,
+.functions_width:first-child {
+    margin-left: auto;
+    text-align: right;
+}
+
+tbody td:nth-child(1n+2) {
+    text-align: center
+}
+
+.line_item, .function_item {
+    text-align: center;
 }

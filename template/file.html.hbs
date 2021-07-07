@@ -13,7 +13,17 @@
          <title>File Detail: {{ filename }}</title>
     </head>
     <body>
+        {{ #if package }}
+        <div class="file-header"><a href="./index.html">{{ package }}</a> &#x00BB; {{ filename }}</div>
+        {{ else }}
         <div class="file-header"><a href="./index.html">Code Coverage Report</a> &#x00BB; {{ filename }}</div>
+        {{ /if }}
+        <div class="container">
+            <div class="info yellow">
+                {{ lines_instrumented }} lines instrumented, {{ lines_hit }} hit ({{ lines_hit_percent }}%).
+                {{ functions_instrumented }} functions instrumented, {{ functions_hit }} hit ({{ functions_hit_percent }}%).
+            </div>
+        </div>
         <div class="container">
             {{ #each contents }}
                 <div class="line">{{ this }}</div>
