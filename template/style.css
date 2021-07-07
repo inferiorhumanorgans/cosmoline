@@ -49,7 +49,9 @@ a, a:active, a:visited {
     background-color: #d0f4ff30;
 }
 
-.red {
+.red,
+[data-hits="0"],
+.hit[data-count='0'] {
     color: #ee6a6f !important;
 }
 
@@ -57,7 +59,8 @@ a, a:active, a:visited {
     color: #fab763 !important;
 }
 
-.green {
+.green,
+.hit {
     color: #a3ce9e !important;
 }
 
@@ -114,21 +117,13 @@ a, a:active, a:visited {
     overflow-x: auto;
 }
 
-.hit {
-    color: #a3ce9e !important;
-}
-
-.hit[data-count='0'] {
-    color: #ee6a6f !important;
-}
-
 .info {
     font-size: 10pt;
     background-color: #d0f4ff14;
     padding: 1em;
 }
 
-// NEW
+/* NEW */
 
 .lines_width:first-child:after,
 .functions_width:first-child:after {
@@ -169,4 +164,16 @@ tbody td:nth-child(1n+2) {
 
 .line_item, .function_item {
     text-align: center;
+}
+
+table[data-direction="1"] thead th.active:after {
+    content: '\21D1';
+    font-size: 150%;
+    line-height: 55%;
+}
+
+table[data-direction="-1"] thead th.active:after {
+    content: '\21D3';
+    font-size: 150%;
+    line-height: 55%;
 }

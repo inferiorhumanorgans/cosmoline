@@ -7,6 +7,61 @@
             }
         </style>
         <title>Function Coverage</title>
+        <script type="application/javascript">
+            // https://stackoverflow.com/questions/7332179/how-to-recursively-search-all-parentnodes
+            function findUpTag(el, tag) {
+                while (el.parentNode) {
+                    el = el.parentNode;
+                    if (el.tagName.localeCompare(tag, 'en', {sensitivity: 'base'}) === 0) {
+                        return el;
+                    }
+                }
+                return null;
+            }
+
+            compare = (selector, direction, isInt) => {
+                return (a,b) => {
+                    let a_value, b_value;
+
+                    if (isInt === true) {
+                        a_value = parseInt(a.querySelector(selector).innerHTML);
+                        b_value = parseInt(b.querySelector(selector).innerHTML);
+                    } else {
+                        a_value = a.querySelector(selector).innerHTML + '';
+                        b_value = b.querySelector(selector).innerHTML + '';
+                    }
+
+                    if (a_value > b_value) {
+                        return direction;
+                    } else if (b_value > a_value) {
+                        return -direction;
+                    } else {
+                        return 0;
+                    }
+                }
+            }
+
+            sortByHits = (selector) => {
+                return function(e) {
+                    let table = findUpTag(e.target, 'table');
+
+                    if ((typeof(table.getAttribute('data-direction')) === 'undefined') || (table.sortColumn !== e.target)) {
+                        table.setAttribute('data-direction', -1);
+                        table.sortColumn.className = [... table.sortColumn.classList].filter((c) => c !== 'active').join(' ');
+                        table.sortColumn = e.target;
+                        table.sortColumn.className = [... table.sortColumn.classList].filter((c) => c !== 'active').join(' ') + ' active';
+                    } else {
+                        table.setAttribute('data-direction', - table.getAttribute('data-direction'));
+                    }
+
+                    let body = table.querySelector('tbody');
+
+                    Array.from(body.querySelectorAll('tr'))
+                        .sort(compare(selector, table.getAttribute('data-direction'), e.target.innerHTML === 'Hits'))
+                        .forEach(tr => body.appendChild(tr) );
+                }
+            }
+        </script>
     </head>
     <body>
         <table class="results" style="table-layout: fixed;">
@@ -19,18 +74,25 @@
                     <th colspan=2><a href="./index.html">Code Coverage Report</a> &#x00BB; Function Coverage</th>
                 </tr>
                 <tr>
-                    <th>Function</th>
-                    <th>Hits</th>
+                    <th id="func_names_header" class="active">Function</th>
+                    <th id="func_hits_header">Hits</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each functions}}
-                <tr>
+                <tr data-hits="{{ count }}">
                     <td>{{ name }}</td>
                     <td>{{ count }}</td>
                 </tr>
                 {{/each}}
             </tbody>
         </table>
+        <script type="text/javascript">
+            document.getElementById('func_names_header').onclick = sortByHits('td:nth-child(0n+1)')
+            document.getElementById('func_hits_header').onclick = sortByHits('td:nth-child(0n+2)')
+
+            findUpTag(document.getElementById('func_names_header'), 'table').sortColumn = document.getElementById('func_names_header');
+            findUpTag(document.getElementById('func_names_header'), 'table').setAttribute('data-direction', 1);
+        </script>
     </body>
 </html>

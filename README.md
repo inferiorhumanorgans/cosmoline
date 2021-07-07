@@ -52,7 +52,7 @@ cd /path/to/my-app
 export OUT_DIR="$(PWD)/coverage-report"
 export APP_NAME="my-app"
 
-# Run tests, save results a JUnit data
+# Run tests, save results as JUnit data
 LLVM_PROFILE_FILE="${OUT_DIR}/${APP_NAME}-%m.profraw" RUSTFLAGS="-Z instrument-coverage" cargo +nightly test --lib -- -Z unstable-options --format=junit > ${OUT_DIR}/junit.xml
 
 # Grab test executable
@@ -90,5 +90,4 @@ Code that's been instrumented is highlighted in red if it was not executed and g
 
 * render clippy warnings?
 * refactor CSS
-* table sorting (JS)
 * include cargo and git metadata
