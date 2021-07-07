@@ -164,42 +164,24 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         )?;
     }
 
-    let func_coverage = summary_report.data[0]
-        .functions
-        .iter()
-        .filter(|f| {
-            f.filenames
-                .iter()
-                .filter(|x| x.starts_with("src/"))
-                .collect::<Vec<_>>()
-                .len()
-                > 0
-        })
-        .collect::<Vec<_>>();
-
     {
-        #[derive(Serialize)]
-        struct Function {
-            pub name: String,
-            pub count: i64,
-        }
-
-        #[derive(Serialize)]
-        struct Context {
-            functions: Vec<Function>,
-        }
-        let mut functions: Vec<Function> = func_coverage
+        let func_coverage = summary_report.data[0]
+            .functions
             .iter()
-            .map(|f| Function {
-                name: f.demangle(),
-                count: f.count,
+            .filter(|f| {
+                f.filenames
+                    .iter()
+                    .filter(|x| x.starts_with("src/"))
+                    .collect::<Vec<_>>()
+                    .len()
+                    > 0
             })
-            .collect();
-        functions.sort_by(|a, b| a.name.partial_cmp(&b.name).unwrap());
-        let context = Context { functions };
+            .collect::<Vec<_>>();
+        use render::RenderFunction;
+        let render = RenderFunction::new(&func_coverage, package, input_path, &handlebars);
         std::fs::write(
             output_path.join("functions.html"),
-            handlebars.render("functions", &context)?,
+            render.render()?,
         )?;
     }
 

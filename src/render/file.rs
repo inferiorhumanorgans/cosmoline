@@ -127,10 +127,10 @@ impl<'a> RenderFile<'a> {
             line_count_width,
             lines_instrumented: self.file.summary.lines.count,
             lines_hit: self.file.summary.lines.covered,
-            lines_hit_percent: format!("{:.2}", self.file.summary.lines.percent),
+            lines_hit_percent: format!("{:.1}", self.file.summary.lines.percent),
             functions_instrumented: self.file.summary.functions.count,
             functions_hit: self.file.summary.functions.covered,
-            functions_hit_percent: format!("{:.2}", self.file.summary.functions.percent),
+            functions_hit_percent: format!("{:.1}", self.file.summary.functions.percent),
         };
 
         let re = regex::Regex::new(r#"\{\{ start_segment (\d+) (\d+) \}\}"#)?;
