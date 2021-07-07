@@ -16,6 +16,33 @@ pub(crate) struct RenderFile<'a> {
     handlebars: &'a Handlebars<'a>
 }
 
+/// Collapsed segment with start and stop points
+#[derive(Debug)]
+struct Seg {
+    pub start_col: i64,
+    pub stop_col: i64,
+    pub start_row: i64,
+    pub stop_row: i64,
+    pub count: i64,
+}
+
+/// Render context
+#[derive(Serialize)]
+struct Context<'a> {
+    package: Option<&'a str>,
+    filename: &'a str,
+    contents: Vec<String>,
+    max_line_len: usize,
+    line_count_width: usize,
+    lines_instrumented: u64,
+    lines_hit: u64,
+    lines_hit_percent: String,
+
+    functions_instrumented: u64,
+    functions_hit: u64,
+    functions_hit_percent: String,
+}
+
 impl<'a> RenderFile<'a> {
     pub fn new(file: &'a FileCoverage<'a>, package: Option<&'a str>, input_path: &'a Path, handlebars: &'a Handlebars<'a>) -> Self {
         Self {
@@ -35,15 +62,6 @@ impl<'a> RenderFile<'a> {
         let max_line_len: usize = lines.iter().map(|l| l.len()).max().unwrap();
         let line_count_width: usize = ((lines.len() as f64).log10() + 1_f64).floor() as usize;
         let mut segments = vec![];
-
-        #[derive(Debug)]
-        struct Seg {
-            pub start_col: i64,
-            pub stop_col: i64,
-            pub start_row: i64,
-            pub stop_row: i64,
-            pub count: i64,
-        }
 
         for segment in self.file.segments.iter() {
             if segment.is_region_entry == true {
@@ -101,21 +119,6 @@ impl<'a> RenderFile<'a> {
             trace!("{:5}: {}", i, line)
         }
 
-        #[derive(Serialize)]
-        struct Context<'a> {
-            package: Option<&'a str>,
-            filename: &'a str,
-            contents: Vec<String>,
-            max_line_len: usize,
-            line_count_width: usize,
-            lines_instrumented: u64,
-            lines_hit: u64,
-            lines_hit_percent: String,
-
-            functions_instrumented: u64,
-            functions_hit: u64,
-            functions_hit_percent: String,
-        }
         let context = Context {
             package: self.package,
             filename: self.file.filename,

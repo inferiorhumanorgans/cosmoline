@@ -16,6 +16,34 @@ pub(crate) struct RenderIndex<'a> {
     handlebars: &'a Handlebars<'a>
 }
 
+#[derive(Serialize)]
+struct FileEntry<'a> {
+    name: &'a str,
+    link: String,
+    pub lines_count: u64,
+    pub lines_covered: u64,
+    pub lines_percent: String,
+    pub lines_percent_n: String,
+    pub lines_percent_d: String,
+    pub line_hit_class: &'a str,
+
+    pub functions_count: u64,
+    pub functions_covered: u64,
+    pub functions_percent: String,
+    pub functions_percent_n: String,
+    pub functions_percent_d: String,
+    pub function_hit_class: &'a str,
+}
+
+#[derive(Serialize)]
+struct Context<'a> {
+    title: String,
+    input_mtime: String,
+    total_line_hit_rate: String,
+    total_func_hit_rate: String,
+    files: Vec<FileEntry<'a>>,
+}
+
 impl<'a> RenderIndex<'a> {
     pub fn new(files: &'a Vec<&FileCoverage<'a>>, totals: &'a FileCoverageSummary, package: Option<&'a str>, input_path: &'a Path, handlebars: &'a Handlebars<'a>) -> Self {
         Self {
@@ -24,33 +52,6 @@ impl<'a> RenderIndex<'a> {
     }
 
     pub fn render(&self) -> Result<String, Box<dyn StdError>> {
-        #[derive(Serialize)]
-        struct FileEntry<'a> {
-            name: &'a str,
-            link: String,
-            pub lines_count: u64,
-            pub lines_covered: u64,
-            pub lines_percent: String,
-            pub lines_percent_n: String,
-            pub lines_percent_d: String,
-            pub line_hit_class: &'a str,
-
-            pub functions_count: u64,
-            pub functions_covered: u64,
-            pub functions_percent: String,
-            pub functions_percent_n: String,
-            pub functions_percent_d: String,
-            pub function_hit_class: &'a str,
-        }
-
-        #[derive(Serialize)]
-        struct Context<'a> {
-            title: String,
-            input_mtime: String,
-            total_line_hit_rate: String,
-            total_func_hit_rate: String,
-            files: Vec<FileEntry<'a>>,
-        }
 
         let input_mtime : DateTime<Local> = metadata(self.input_path)?.modified()?.into();
 
