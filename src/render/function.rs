@@ -20,14 +20,14 @@ struct Context<'a> {
 pub(crate) struct RenderFunction<'a> {
     func_coverage: &'a [&'a FunctionCoverage<'a>],
     package: Option<&'a str>,
-    input_path: &'a Path,
+    // input_path: &'a Path,
     handlebars: &'a Handlebars<'a>,
 }
 
 impl<'a> RenderFunction<'a> {
-    pub fn new(func_coverage: &'a[&'a FunctionCoverage], package: Option<&'a str>, input_path: &'a Path, handlebars: &'a Handlebars<'a>) -> Self {
+    pub fn new(func_coverage: &'a[&'a FunctionCoverage], package: Option<&'a str>, _input_path: &'a Path, handlebars: &'a Handlebars<'a>) -> Self {
         Self {
-            func_coverage, package, input_path, handlebars
+            func_coverage, package, handlebars
         }
     }
 
