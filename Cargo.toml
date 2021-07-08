@@ -8,6 +8,7 @@ keywords = [ "code-coverage", "testing" ]
 categories = [ "development-tools" ]
 repository = "https://github.com/inferiorhumanorgans/cosmoline"
 readme = "README.md"
+description = "Command line tool to generate HTML code coverage reports for rust projects"
 
 [dependencies]
 serde = { version = "1.0", features = [ "derive" ] }
