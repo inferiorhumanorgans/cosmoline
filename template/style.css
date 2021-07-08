@@ -49,6 +49,13 @@ a, a:active, a:visited {
     background-color: #d0f4ff30;
 }
 
+.results tbody tr:hover {
+    background-color: #a3ce9e40;
+}
+.results tbody tr:hover * {
+    background-color: rgba(0,0,0,0) !important;
+}
+
 .red,
 [data-hits="0"],
 .hit[data-count='0'] {
