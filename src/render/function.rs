@@ -12,7 +12,8 @@ struct Function {
 }
 
 #[derive(Serialize)]
-struct Context {
+struct Context<'a> {
+    package: Option<&'a str>,
     functions: Vec<Function>,
 }
 
@@ -39,7 +40,11 @@ impl<'a> RenderFunction<'a> {
             })
             .collect();
         functions.sort_by(|a, b| a.name.partial_cmp(&b.name).unwrap());
-        let context = Context { functions };
+
+        let context = Context {
+            package: self.package,
+            functions
+        };
 
         self.handlebars.render("functions", &context).map_err(|e| e.into())
     }

@@ -72,7 +72,11 @@
             </colgroup>
             <thead>
                 <tr>
+                    {{ #if package }}
+                    <th colspan=2><a href="./index.html">{{ package }}</a> &#x00BB; Function Coverage</th>
+                    {{ else }}
                     <th colspan=2><a href="./index.html">Code Coverage Report</a> &#x00BB; Function Coverage</th>
+                    {{ /if }}
                 </tr>
                 <tr>
                     <th id="func_names_header" class="active">Function</th>
